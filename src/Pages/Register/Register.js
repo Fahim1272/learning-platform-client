@@ -2,10 +2,9 @@ import React from 'react';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form'
-import { Link } from 'react-router-dom';
 
-const Login = () => {
-    const handleLogin = event =>{
+const Register = () => {
+    const handleRegister = event => {
         event.preventDefault();
         const email = event.target.email.value;
         const password = event.target.password.value;
@@ -14,10 +13,15 @@ const Login = () => {
     }
     return (
         <div style={{ height: '100%' }}>
-            <Card className='mx-auto mt-5' style={{ width: '50rem', height: '25rem' }}>
+            <Card className='mx-auto mt-5' style={{ width: '50rem', height: '30rem' }}>
                 <Card.Body>
-                    <Card.Title>Please Login</Card.Title>
-                    <Form onSubmit={handleLogin}>
+                    <Card.Title><span className='text-warning' >Welcome!</span> Register a New Acount.</Card.Title>
+                    <Form onSubmit={handleRegister}>
+                        <Form.Group className="mb-3" controlId="formBasicEmail">
+                            <Form.Label>Full Name</Form.Label>
+                            <Form.Control type="name" name='name' placeholder="Enter your full name!" />
+
+                        </Form.Group>
                         <Form.Group className="mb-3" controlId="formBasicEmail">
                             <Form.Label>Email address</Form.Label>
                             <Form.Control type="email" name='email' placeholder="Enter email" />
@@ -28,21 +32,16 @@ const Login = () => {
                             <Form.Label>Password</Form.Label>
                             <Form.Control type="password" name='password' placeholder="Password" />
                         </Form.Group>
-                        <Form.Group className="mb-3" controlId="formBasicCheckbox"> 
-                            <Form.Text className="text-primary">
-                                Didn't have any account?  <Link to={'/register'} >Register Now</Link>
-                            </Form.Text>
+                        <Form.Group className="mb-3" controlId="formBasicCheckbox">
                         </Form.Group>
                         <Button variant="primary" type="submit">
-                            Submit
+                            Register
                         </Button>
                     </Form>
-                    <Card.Link href="#">Card Link</Card.Link>
-                    <Card.Link href="#">Another Link</Card.Link>
                 </Card.Body>
             </Card>
         </div>
     );
 };
 
-export default Login;
+export default Register;
