@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form'
 import { Link } from 'react-router-dom';
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, GoogleAuthProvider, signInWithEmailAndPassword } from "firebase/auth";
 import app from '../../firebase/firebase.config';
+import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
 
 const auth = getAuth(app);
 const Login = () => {
@@ -28,6 +29,16 @@ const Login = () => {
         })
         console.log(email, password);
 
+    }
+    const {providerLogin} = useContext(AuthContext);
+    const googleProvider = new GoogleAuthProvider()
+    const HandleGoogleSignIn = ()=> {
+        providerLogin(googleProvider)
+        .then(result=>{
+            const user = result.user;
+            console.log(user);
+        })
+        .catch(error => console.error(error))
     }
     return (
         <div style={{ height: '100%' }}>
@@ -58,8 +69,8 @@ const Login = () => {
                     {
                         success && <p>Login successfully</p>
                     }
-                    <Card.Link href="#">Card Link</Card.Link>
-                    <Card.Link href="#">Another Link</Card.Link>
+                    <Button onClick={HandleGoogleSignIn} variant="light">Google Sign In</Button>{' '}
+                    <Button variant="info">GitHub Sign In</Button>{' '}
                 </Card.Body>
             </Card>
         </div>
