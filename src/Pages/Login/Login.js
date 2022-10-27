@@ -2,13 +2,17 @@ import React, { useContext, useState } from 'react';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form'
-import { Link } from 'react-router-dom';
-import { getAuth, GoogleAuthProvider, signInWithEmailAndPassword } from "firebase/auth";
-import app from '../../firebase/firebase.config';
-import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
+import { Link, useNavigate } from 'react-router-dom';
+import {  GoogleAuthProvider} from "firebase/auth";
+// import app from '../../firebase/firebase.config';
+import  { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
 
-const auth = getAuth(app);
+
+
+// const auth = getAuth(app);
 const Login = () => {
+    const { signInuser } = useContext(AuthContext)
+    const navigate = useNavigate()
     const [success, setSuccess]= useState(false)
     const [error, SetError] = useState('');
     const handleLogin = event =>{
@@ -17,11 +21,16 @@ const Login = () => {
         const form = event.target;
         const email = form.email.value;
         const password = form.password.value;
-        signInWithEmailAndPassword(auth, email, password)
+
+        
+        // signInWithEmailAndPassword(auth, email, password)
+        signInuser(email, password) 
         .then(result =>{
             const user = result.user;
             setSuccess(true)
+            form.reset();
             console.log(user);
+            navigate('/')
         })
         .catch(error=>{
             console.error('error',error);

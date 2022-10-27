@@ -1,13 +1,15 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form'
 import app from '../../firebase/firebase.config';
-import { createUserWithEmailAndPassword, getAuth, sendEmailVerification } from "firebase/auth";
+import { getAuth, sendEmailVerification } from "firebase/auth";
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
 
 const auth = getAuth(app);
 const Register = () => {
+    const { createUser } = useContext(AuthContext)
     const [error, SetError] = useState('');
     const [success, setSuccess] = useState(false)
     const handleRegister = event => {
@@ -17,8 +19,10 @@ const Register = () => {
         const email = form.email.value;
         const password = form.password.value;
         console.log(email, password);
-        createUserWithEmailAndPassword(auth, email, password)
-            .then(result => {
+        // new added code
+        createUser(email, password)
+         // createUserWithEmailAndPassword(auth, email, password)
+        .then(result => {
                 const user = result.user;
                 console.log(user);
                 setSuccess(true);
@@ -45,6 +49,11 @@ const Register = () => {
                         <Form.Group className="mb-3" controlId="formBasicEmail">
                             <Form.Label>Full Name</Form.Label>
                             <Form.Control type="name" name='name' placeholder="Enter your full name!" />
+
+                        </Form.Group>
+                        <Form.Group className="mb-3" controlId="formBasicEmail">
+                            <Form.Label>Photo URL</Form.Label>
+                            <Form.Control type="text" name='photoURL' placeholder="Photo URL" />
 
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="formBasicEmail">
