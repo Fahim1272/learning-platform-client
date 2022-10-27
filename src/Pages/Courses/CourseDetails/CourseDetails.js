@@ -1,5 +1,5 @@
 import React from 'react';
-import { useLoaderData } from 'react-router-dom';
+import { Link, useLoaderData } from 'react-router-dom';
 import Card from 'react-bootstrap/Card';
 import { Button } from 'react-bootstrap';
 
@@ -14,7 +14,8 @@ const CourseDetails = ({ params }) => {
                     <Card.Text>
                         {courseDetails.details}
                     </Card.Text>
-                    <Button variant="primary">Purchase This Course</Button>
+                    <Link to="/checkout" >purchse</Link>
+                    {/* <Button variant="primary">Purchase This Course</Button> */}
                 </Card.Body>
             </Card>
             {/* {coursDetails.title} */}

@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form'
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import {  GoogleAuthProvider} from "firebase/auth";
 // import app from '../../firebase/firebase.config';
 import  { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
@@ -13,6 +13,8 @@ import  { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
 const Login = () => {
     const { signInuser } = useContext(AuthContext)
     const navigate = useNavigate()
+    const location = useLocation()
+    const from = location.state?.from?.pathname || '/'
     const [success, setSuccess]= useState(false)
     const [error, SetError] = useState('');
     const handleLogin = event =>{
@@ -30,7 +32,7 @@ const Login = () => {
             setSuccess(true)
             form.reset();
             console.log(user);
-            navigate('/')
+            navigate(from, {replace: true})
         })
         .catch(error=>{
             console.error('error',error);
