@@ -32,7 +32,8 @@ import Register from "../../Pages/Register/Register";
            },
            {
             path:'/courses',
-            element:<Courses></Courses>
+            element:<Courses></Courses>,
+            loader: ({params}) => fetch(`http://localhost:5000/courses/${[params.id]}`)
            },
            {
             path:'/login',
