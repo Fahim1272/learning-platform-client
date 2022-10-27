@@ -1,14 +1,31 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form'
 import { Link } from 'react-router-dom';
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import app from '../../firebase/firebase.config';
 
+const auth = getAuth(app);
 const Login = () => {
+    const [success, setSuccess]= useState(false)
+    const [error, SetError] = useState('');
     const handleLogin = event =>{
         event.preventDefault();
-        const email = event.target.email.value;
-        const password = event.target.password.value;
+        setSuccess(false)
+        const form = event.target;
+        const email = form.email.value;
+        const password = form.password.value;
+        signInWithEmailAndPassword(auth, email, password)
+        .then(result =>{
+            const user = result.user;
+            setSuccess(true)
+            console.log(user);
+        })
+        .catch(error=>{
+            console.error('error',error);
+            SetError(error.message)
+        })
         console.log(email, password);
 
     }
@@ -29,7 +46,7 @@ const Login = () => {
                             <Form.Control type="password" name='password' placeholder="Password" />
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="formBasicCheckbox"> 
-                            <Form.Text className="text-primary">
+                            <Form.Text className="text-dark">
                                 Didn't have any account?  <Link to={'/register'} >Register Now</Link>
                             </Form.Text>
                         </Form.Group>
@@ -37,6 +54,10 @@ const Login = () => {
                             Submit
                         </Button>
                     </Form>
+                    <p className='text-danger' >{error}</p>
+                    {
+                        success && <p>Login successfully</p>
+                    }
                     <Card.Link href="#">Card Link</Card.Link>
                     <Card.Link href="#">Another Link</Card.Link>
                 </Card.Body>

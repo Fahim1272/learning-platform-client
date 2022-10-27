@@ -14,7 +14,8 @@ import Register from "../../Pages/Register/Register";
         children:[
            {
             path:'/',
-            element:<Home></Home>
+            element:<Home></Home>,
+            loader:() => fetch ('http://localhost:5000/courses')
            },
            {
             path:'/blog',
@@ -26,6 +27,11 @@ import Register from "../../Pages/Register/Register";
            },
            {
             path:'/courses/:id',
+            element:<Courses></Courses>,
+            loader:({params}) => fetch (`http://localhost:5000/category/${params.id}`)
+           },
+           {
+            path:'/courses',
             element:<Courses></Courses>
            },
            {

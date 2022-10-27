@@ -3,28 +3,39 @@ import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form'
 import app from '../../firebase/firebase.config';
-import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
+import { createUserWithEmailAndPassword, getAuth, sendEmailVerification } from "firebase/auth";
+import { Link } from 'react-router-dom';
 
 const auth = getAuth(app);
 const Register = () => {
     const [error, SetError] = useState('');
     const [success, setSuccess] = useState(false)
     const handleRegister = event => {
+        setSuccess(false)
         event.preventDefault();
-        const email = event.target.email.value;
-        const password = event.target.password.value;
+        const form = event.target;
+        const email = form.email.value;
+        const password = form.password.value;
         console.log(email, password);
         createUserWithEmailAndPassword(auth, email, password)
             .then(result => {
                 const user = result.user;
                 console.log(user);
-                setSuccess(true)
+                setSuccess(true);
+                form.reset();
+                verifayEmail();
             })
             .catch(error => {
                 console.error('error', error);
                 SetError(error.message)
             })
     }
+    const verifayEmail = () =>{
+        sendEmailVerification(auth.currentUser)
+        .then((
+            alert('Please Check your email')
+        ))
+    } 
     return (
         <div style={{ height: '100%' }}>
             <Card className='mx-auto mt-5' style={{ width: '50rem', height: '30rem' }}>
@@ -48,6 +59,9 @@ const Register = () => {
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="formBasicCheckbox">
                         </Form.Group>
+                        <Form.Text className="text-dark">
+                                Already have an any account?  <Link to={'/login'} >Login Now</Link>
+                            </Form.Text>
                         <p className='text-danger' >{error}</p>
                         {success && <p className='text-info' > User Created Successfully</p>}
                         <Button variant="primary" type="submit">
