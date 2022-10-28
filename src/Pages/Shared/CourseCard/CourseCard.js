@@ -1,6 +1,4 @@
 import React from 'react';
-import { Col, Row } from 'react-bootstrap';
-import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import { Link, } from 'react-router-dom';
 
@@ -9,10 +7,10 @@ const CourseCard = ({ course }) => {
     console.log(course);
     return (
         // style={{ width: '15rem' }} 
-            <Row>
-                <Col>
-                    <Card className="text-center col">
-                        <Card.Header>Featured</Card.Header>
+            
+                <div className='justify-content-center'>
+                    <Card className="text-center col mb-4 ">
+                        <Card.Header>Course</Card.Header>
                         <Card.Img variant="top" src={image_url} />
                         <Card.Body>
                             <Card.Title>{title}</Card.Title>
@@ -23,10 +21,9 @@ const CourseCard = ({ course }) => {
                                 }
                             </Card.Text>
                         </Card.Body>
-                        <Card.Footer className="text-muted">2 days ago</Card.Footer>
                     </Card>
-                </Col>
-            </Row>
+                </div>
+           
     );
 };
 

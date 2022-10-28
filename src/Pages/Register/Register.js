@@ -9,48 +9,52 @@ import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
 
 const auth = getAuth(app);
 const Register = () => {
-    const { createUser, updateUserProfile } = useContext(AuthContext)
+    const { createUser, updateUserProfile, } = useContext(AuthContext)
     const [error, SetError] = useState('');
     const [success, setSuccess] = useState(false)
     const handleRegister = event => {
         setSuccess(false)
         event.preventDefault();
         const form = event.target;
+        const photoURL = form.photoURL.value;
+        const name = form.name.value;
         const email = form.email.value;
         const password = form.password.value;
         console.log(email, password);
         // new added code
         createUser(email, password)
-         // createUserWithEmailAndPassword(auth, email, password)
-        .then(result => {
+            // createUserWithEmailAndPassword(auth, email, password)
+            .then(result => {
                 const user = result.user;
                 console.log(user);
                 setSuccess(true);
                 form.reset();
                 verifayEmail();
-                handleUserProfile()
+                handleUserProfile(name, photoURL)
             })
             .catch(error => {
                 console.error('error', error);
                 SetError(error.message)
             })
     }
-    const handleUserProfile = (name, photoURL) =>{
+    const handleUserProfile = (name, photoURL) => {
         const profile = {
-            displayName:name,
+            displayName: name,
             photoURL: photoURL
         }
         updateUserProfile(profile)
+            .then(() => { })
+            .catch(error => console.error(error))
     }
-    const verifayEmail = () =>{
+    const verifayEmail = () => {
         sendEmailVerification(auth.currentUser)
-        .then((
-            alert('Please Check your email')
-        ))
-    } 
+            .then((
+                alert('Please Check your email')
+            ))
+    }
     return (
         <div style={{ height: '100%' }}>
-            <Card className='mx-auto mt-5' style={{ width: '50rem', height: '30rem' }}>
+            <Card className='mx-auto mt-5' style={{ width: '50rem', height: '35rem' }}>
                 <Card.Body>
                     <Card.Title><span className='text-warning' >Welcome!</span> Register a New Acount.</Card.Title>
                     <Form onSubmit={handleRegister}>
@@ -77,8 +81,8 @@ const Register = () => {
                         <Form.Group className="mb-3" controlId="formBasicCheckbox">
                         </Form.Group>
                         <Form.Text className="text-dark">
-                                Already have an any account?  <Link to={'/login'} >Login Now</Link>
-                            </Form.Text>
+                            Already have an any account?  <Link to={'/login'} >Login Now</Link>
+                        </Form.Text>
                         <p className='text-danger' >{error}</p>
                         {success && <p className='text-info' > User Created Successfully</p>}
                         <Button variant="primary" type="submit">

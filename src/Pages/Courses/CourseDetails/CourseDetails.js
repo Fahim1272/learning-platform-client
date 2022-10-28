@@ -22,12 +22,11 @@ const CourseDetails = ({ params }) => {
                     <Card.Text>
                         <div ref={componentRef} style={{width:'100%'}}>{courseDetails.details}</div>
                     </Card.Text>
-                    <Link to="/checkout" >purchase</Link>
-                    <Button onClick={handlePdf}>Download PDF</Button>
-                    {/* <Button variant="primary">Purchase This Course</Button> */}
+                    <Link to="/checkout" >Purchase This Course</Link>
+                    <Button className='ms-4' onClick={handlePdf}>Download PDF</Button>
+                    
                 </Card.Body>
             </Card>
-            {/* {coursDetails.title} */}
         </div>
     );
 };

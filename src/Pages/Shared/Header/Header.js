@@ -34,9 +34,10 @@ const Header = () => {
   return (
     <div>
       <>
-        <Navbar bg="dark" variant="dark">
+        <Navbar bg="light" variant="light">
           <Container>
-            <Navbar.Brand href="#">
+            <Image  style={{height:'40px',}} src='https://img.icons8.com/ios/344/experiment-trial.png'></Image>
+            <Navbar.Brand className='ms-3' href="#">
               {/* <img
               FaUser=""
               src="/logo.svg"
@@ -48,27 +49,27 @@ const Header = () => {
             </Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
-              <Nav className="me-auto">
+              <Nav className="me-auto text-light">
                 <Nav.Link href="/">Home</Nav.Link>
                 <Nav.Link href="/courses/">Courses</Nav.Link>
                 <Nav.Link href="/blog">Blog</Nav.Link>
-                <Nav.Link href="#link">FAQ</Nav.Link>
+                <Nav.Link href="/faq">FAQ</Nav.Link>
               </Nav>
             </Navbar.Collapse>
 
-            <Nav className='text-white' >
+            <Nav className='text-dark' >
               <Nav.Link>
                 {
                   user?.uid ?
 
                     <>
                       <span>{user?.displayName}</span>
-                      <Button onClick={handelLogOut} className='mx-3' variant="outline-light">Log Out</Button>{' '}
+                      <Button onClick={handelLogOut} className='mx-3' variant="outline-dark">Log Out</Button>{' '}
                     </>
                     :
                     <>
-                      <Button onClick={navigateToLogin} variant="light">Login</Button>{' '}
-                      <Button className='ms-3' onClick={navigateToRegister} variant="primary">Register</Button>{' '}
+                      <Button onClick={navigateToLogin} variant="outline-dark">Login</Button>{' '}
+                      <Button className='ms-3' onClick={navigateToRegister} variant="outline-dark">Register</Button>{' '}
                     </>
                 }
 

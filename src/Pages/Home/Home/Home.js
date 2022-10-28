@@ -6,7 +6,7 @@ const Home = () => {
     const courseName = useLoaderData();
     return (
         <div>
-            <h2>Courses are: {courseName.length}</h2>
+            <h2 className='my-3'>We are offering these Courses </h2>
             {
                 courseName.map(course=><CourseCard
                 key={course._id}
