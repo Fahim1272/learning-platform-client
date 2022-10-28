@@ -23,7 +23,7 @@ const CourseDetails = ({ params }) => {
                         <div ref={componentRef} style={{width:'100%'}}>{courseDetails.details}</div>
                     </Card.Text>
                     <Link to="/checkout" >Purchase This Course</Link>
-                    <Button className='ms-4' onClick={handlePdf}>Download PDF</Button>
+                    <Button className='ms-4'variant="outline-dark" onClick={handlePdf}>Download PDF</Button>
                     
                 </Card.Body>
             </Card>

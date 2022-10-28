@@ -55,7 +55,7 @@ const Register = () => {
     return (
         <div style={{ height: '100%' }}>
             <Card className='mx-auto mt-5' style={{ width: '50rem', height: '35rem' }}>
-                <Card.Body>
+                <Card.Body className='p-5'>
                     <Card.Title><span className='text-warning' >Welcome!</span> Register a New Acount.</Card.Title>
                     <Form onSubmit={handleRegister}>
                         <Form.Group className="mb-3" controlId="formBasicEmail">

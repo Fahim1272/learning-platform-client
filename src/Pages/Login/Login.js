@@ -59,10 +59,10 @@ const Login = () => {
         .catch(error => console.error(error))
     }
     return (
-        <div style={{ height: '100%' }}>
-            <Card className='mx-auto mt-5' style={{ width: '50rem', height: '25rem' }}>
-                <Card.Body>
-                    <Card.Title>Please Login</Card.Title>
+        <div className='' style={{ height: '100%' }}>
+            <Card className='mx-auto mt-5'  style={{ width: '50rem', height: '30rem' }}>
+                <Card.Body className='p-5'>
+                    <Card.Title className='text-warning'>Please Login</Card.Title>
                     <Form onSubmit={handleLogin}>
                         <Form.Group className="mb-3" controlId="formBasicEmail">
                             <Form.Label>Email address</Form.Label>
@@ -79,16 +79,16 @@ const Login = () => {
                                 Didn't have any account?  <Link to={'/register'} >Register Now</Link>
                             </Form.Text>
                         </Form.Group>
-                        <Button variant="primary" type="submit">
-                            Submit
+                        <Button variant="info" type="submit">
+                            Login
                         </Button>
                     </Form>
                     <p className='text-danger' >{error}</p>
                     {
                         success && <p>Login successfully</p>
                     }
-                    <Button onClick={HandleGoogleSignIn} variant="light">Google Sign In</Button>{' '}
-                    <Button onClick={HandleGithubSignIn} variant="info">GitHub Sign In</Button>{' '}
+                    <Button onClick={HandleGoogleSignIn} variant="outline-dark">Google Sign In</Button>{' '}
+                    <Button onClick={HandleGithubSignIn} variant="outline-dark">GitHub Sign In</Button>{' '}
                 </Card.Body>
             </Card>
         </div>

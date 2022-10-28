@@ -18,7 +18,7 @@ export const routes = createBrowserRouter([
          {
             path: '/',
             element: <Home></Home>,
-            loader: () => fetch('http://localhost:5000/courses')
+            loader: () => fetch('https://learning-platform-server-jet.vercel.app/courses')
          },
          {
             path: '/blog',
@@ -31,17 +31,17 @@ export const routes = createBrowserRouter([
          {
             path: '/category/:id',
             element: <Courses></Courses>,
-            loader: ({ params }) => fetch(`http://localhost:5000/category/${params.id}`)
+            loader: ({ params }) => fetch(`https://learning-platform-server-jet.vercel.app/category/${params.id}`)
          },
          {
             path: '/courses',
             element: <Courses></Courses>,
-            loader: ({ params }) => fetch(`http://localhost:5000/courses/${[params.id]}`)
+            loader: ({ params }) => fetch(`https://learning-platform-server-jet.vercel.app/courses/${[params.id]}`)
          },
          {
             path: '/courses/:id',
             element: <CourseDetails></CourseDetails>,
-            loader: ({ params }) => fetch(`http://localhost:5000/courses/${[params.id]}`)
+            loader: ({ params }) => fetch(`https://learning-platform-server-jet.vercel.app/courses/${[params.id]}`)
          },
          {
             path: '/login',
@@ -56,7 +56,7 @@ export const routes = createBrowserRouter([
          // {
          //    path: '/checkout/:id',
          //    element:<Checkout></Checkout>,
-         //    loader: ({ params }) => fetch(`http://localhost:5000/courses/${[params.id]}`)
+         //    loader: ({ params }) => fetch(`https://learning-platform-server-jet.vercel.app/courses/${[params.id]}`)
          // },
          // old code
          // {

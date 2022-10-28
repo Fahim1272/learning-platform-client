@@ -1,4 +1,4 @@
-***Assignment 10
+Assignment 10
 <ul>
     <li>This is an Educative website</li>
     <li>We offer some productive courses</li>
