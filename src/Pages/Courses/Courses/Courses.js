@@ -1,6 +1,7 @@
 
 import { Col, Container, Row } from 'react-bootstrap';
 import { useLoaderData } from 'react-router-dom';
+import Checkout from '../../CheckOut/Checkout';
 import LeftSideNav from '../../LeftSideNav/LeftSideNav';
 import CourseCard from '../../Shared/CourseCard/CourseCard';
 
@@ -20,7 +21,8 @@ const Courses = () => {
                               key={course._id}
                               course={course}
                               ></CourseCard>)  
-                            }
+                            },
+                            
                     </Col>
 
                 </Row>

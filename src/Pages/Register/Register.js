@@ -28,7 +28,7 @@ const Register = () => {
                 setSuccess(true);
                 form.reset();
                 verifayEmail();
-                handleUserProfile(name,)
+                handleUserProfile()
             })
             .catch(error => {
                 console.error('error', error);
