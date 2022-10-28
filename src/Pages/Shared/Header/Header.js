@@ -8,6 +8,8 @@ import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
 import { Image } from 'react-bootstrap';
 import { FaUser } from "react-icons/fa";
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
+import Tooltip from 'react-bootstrap/Tooltip';
 
 const Header = () => {
 
@@ -18,13 +20,17 @@ const Header = () => {
   const navigateToRegister = () => {
     navigate('./register')
   };
-  const handelLogOut = () =>{
+  const handelLogOut = () => {
     providerLogout()
-    .then( ()=> {})
-    .catch( error=> console.error(error))
+      .then(() => { })
+      .catch(error => console.error(error))
 
   }
-  const { user, providerLogout } = useContext(AuthContext)
+  const { user, providerLogout } = useContext(AuthContext);
+  const renderTooltip = (props) => (
+    <Tooltip id="button-tooltip" {...props}>
+     {user?.displayName}
+    </Tooltip>)
   return (
     <div>
       <>
@@ -68,9 +74,17 @@ const Header = () => {
 
               </Nav.Link>
             </Nav>
+            <OverlayTrigger
+              placement="right"
+              delay={{ show: 250, hide: 400 }}
+              overlay={renderTooltip}
+            >
+              {/* <Button variant="success">Hover me to see</Button> */}
+           
             {
               user?.photoURL ? <Image roundedCircle style={{ height: '30px' }} src={user?.photoURL}></Image> : <FaUser className='text-light' ></FaUser>
             }
+             </OverlayTrigger>
           </Container>
         </Navbar>
       </>

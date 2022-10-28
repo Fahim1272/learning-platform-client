@@ -8,8 +8,9 @@ const CourseCard = ({ course }) => {
     const { title, details, _id, image_url, } = course;
     console.log(course,);
     return (
-        <Row >
-            <Col>
+        // style={{ width: '15rem' }} 
+        <div className='course-card' >
+        
                 <Card className="text-center col">
                     <Card.Header>Featured</Card.Header>
                     <Card.Img variant="top" src={image_url} />
@@ -23,8 +24,8 @@ const CourseCard = ({ course }) => {
                     </Card.Body>
                     <Card.Footer className="text-muted">2 days ago</Card.Footer>
                 </Card>
-            </Col>
-        </Row>
+            
+        </div>
     );
 };
 
