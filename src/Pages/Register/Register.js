@@ -9,7 +9,7 @@ import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
 
 const auth = getAuth(app);
 const Register = () => {
-    const { createUser } = useContext(AuthContext)
+    const { createUser, updateUserProfile } = useContext(AuthContext)
     const [error, SetError] = useState('');
     const [success, setSuccess] = useState(false)
     const handleRegister = event => {
@@ -28,11 +28,19 @@ const Register = () => {
                 setSuccess(true);
                 form.reset();
                 verifayEmail();
+                handleUserProfile(name,)
             })
             .catch(error => {
                 console.error('error', error);
                 SetError(error.message)
             })
+    }
+    const handleUserProfile = (name, photoURL) =>{
+        const profile = {
+            displayName:name,
+            photoURL: photoURL
+        }
+        updateUserProfile(profile)
     }
     const verifayEmail = () =>{
         sendEmailVerification(auth.currentUser)

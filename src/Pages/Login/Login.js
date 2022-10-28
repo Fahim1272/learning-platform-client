@@ -3,7 +3,7 @@ import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form'
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import {  GoogleAuthProvider} from "firebase/auth";
+import {  GithubAuthProvider, GoogleAuthProvider} from "firebase/auth";
 // import app from '../../firebase/firebase.config';
 import  { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
 
@@ -24,8 +24,6 @@ const Login = () => {
         const email = form.email.value;
         const password = form.password.value;
 
-        
-        // signInWithEmailAndPassword(auth, email, password)
         signInuser(email, password) 
         .then(result =>{
             const user = result.user;
@@ -42,9 +40,18 @@ const Login = () => {
 
     }
     const {providerLogin} = useContext(AuthContext);
-    const googleProvider = new GoogleAuthProvider()
+    const googleProvider = new GoogleAuthProvider();
+    const githubProvider = new GithubAuthProvider()
     const HandleGoogleSignIn = ()=> {
         providerLogin(googleProvider)
+        .then(result=>{
+            const user = result.user;
+            console.log(user);
+        })
+        .catch(error => console.error(error))
+    }
+    const HandleGithubSignIn = ()=> {
+        providerLogin(githubProvider)
         .then(result=>{
             const user = result.user;
             console.log(user);
@@ -81,7 +88,7 @@ const Login = () => {
                         success && <p>Login successfully</p>
                     }
                     <Button onClick={HandleGoogleSignIn} variant="light">Google Sign In</Button>{' '}
-                    <Button variant="info">GitHub Sign In</Button>{' '}
+                    <Button onClick={HandleGithubSignIn} variant="info">GitHub Sign In</Button>{' '}
                 </Card.Body>
             </Card>
         </div>
