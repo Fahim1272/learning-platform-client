@@ -5,7 +5,7 @@ const Blog = () => {
     return (
         <Row className=' justify-content-center'>
             <h2 className='text-primary text-center my-5'>Question || Answer</h2>
-            <Accordion className='w-50 my-5' defaultActiveKey="0" flush>
+            <Accordion className='w-75 my-5' defaultActiveKey="0" flush>
                 <Accordion.Item eventKey="0">
                     <Accordion.Header><strong>What is CORS?</strong></Accordion.Header>
                     <Accordion.Body>
@@ -13,7 +13,7 @@ const Blog = () => {
                     </Accordion.Body>
                 </Accordion.Item>
                 <Accordion.Item eventKey="1">
-                    <Accordion.Header><strong>Why are you using `firebase`? What other options do you have to implement authentication?</strong></Accordion.Header>
+                    <Accordion.Header><strong>Why are you using firebase? What other options do you have to implement authentication?</strong></Accordion.Header>
                     <Accordion.Body>
                         <strong>2.1: Why are you using firebase?</strong>
                         <p>Firebase helps us develop high-quality apps, grow Our user base, and earn more money. Each feature works independently, and they work even better together.</p>
